@@ -1,19 +1,33 @@
-import requests
-import random
-import urllib.parse
-import string
-import re
-import tls_client
-import json
-import time
-import yaml
+import os
+try:
+    import requests
+    import random
+    import urllib.parse
+    import string
+    import re
+    import tls_client
+    import json
+    import time
+    import yaml
 
-from datetime import datetime
-from requests_toolbelt import MultipartEncoder
-from colorama import Fore, Style, init
-from threading import Lock
-from concurrent.futures import ThreadPoolExecutor
-from traceback import print_exc
+    from datetime import datetime
+    from requests_toolbelt import MultipartEncoder
+    from colorama import Fore, Style, init
+    from threading import Lock
+    from concurrent.futures import ThreadPoolExecutor
+    from traceback import print_exc
+except ModuleNotFoundError:
+    os.system("pip install requests")
+    os.system("pip install tls_client")
+    os.system("pip install pyyaml")
+    os.system("pip install requests_toolbelt")
+    os.system("pip install colorama")
+    os.system("cls")
+    import requests
+    import tls_client
+    import yaml
+    from requests_toolbelt import MultipartEncoder
+    from colorama import Fore, Style, init
 
 flights =['sc_allowvenmoforbuynow-universalwebstore', 'sc_appendconversiontype', 'sc_imagelazyload', 'sc_pidlerrorhandler-minecraftnet', 'sc_showvalidpis', 'sc_checkoutitemfontweight', 'sc_challengescenarioda', 'sc_itemsubpricetsenabled', 'sc_purchasedblockedby', 'sc_passthroughculture', 'sc_scdssapi', 'sc_checkoutplaceordermoraybuttons', 'sc_cartcoadobetelemetryfix', 'sc_redirecttosignin', 'sc_disablelistpichanges-storewindowsinapp', 'sc_errorscenariotelemetry', 'sc_buynowpmgrouping', 'sc_paymentpickeritem', 'sc_cleanreducercode', 'sc_dimealipaystylingfix', 'sc_asyncpurchasefailure', 'sc_disablecsvforadd-xeweb', 'sc_promocode', 'sc_buynowpmgrouping-clipchamp', 'sc_manualreviewcongrats', 'sc_optionalcatalogclienttype', 'sc_klarna', 'sc_preparecheckoutrefactor', 'sc_euomnibusprice', 'sc_gcoitemeligibility', 'sc_productimageoptimization', 'sc_reactredeemv2', 'sc_currencyformattingpkg', 'sc_fixasyncpiflow', 'sc_pidlnetworkerror', 'sc_allowvenmoforbuynow', 'sc_redeemupdateprofileredirect', 'sc_promocodefeature-web-desktop', 'sc_disabledpaymentoption', 'sc_enablecartcreationerrorparsing', 'sc_purchaseblock', 'sc_returnoospsatocart', 'sc_updatepopupstring', 'sc_allowpaysafeforus', 'sc_nextpidl', 'sc_fixasyncpitelemetry', 'sc_apperrorboundarytsenabled', 'sc_allowupiqr', 'sc_apgpinlineerror', 'sc_allowpaysafeforus-minecraftnet', 'sc_usenewinstructionstring', 'sc_fincastlecallerapplicationidcheck', 'sc_versionts', 'sc_allowpaypalbnpl', 'sc_officescds', 'sc_allowpaypalbnplforcheckout', 'sc_disableupgradetrycheckout', 'sc_extendPageTagToOverride', 'sc_mcupgrade', 'sc_perfscenariofix', 'sc_disablebuynowpmgrouping-officedime', 'sc_skipselectpi', 'sc_disablecsvforadd-minecraftnet', 'sc_allowmpesapi', 'sc_reloadiflineitemdiscrepancy', 'sc_fatalerroractionsts', 'sc_removereduxtoolkit', 'sc_allowvenmo', 'sc_spinnerts', 'sc_buynowpmgrouping-storeapp', 'sc_gifterroralert', 'sc_achpaymentoptiontsenabled', 'sc_shippingallowlist', 'sc_autorenewalconsentnarratorfix', 'sc_emptyresultcheck', 'sc_bulkupdateproducts', 'sc_buynowpagetsenabled', 'sc_buynowpmgrouping-xboxcom', 'sc_giftredeemlegalterms', 'sc_abandonedretry', 'sc_analyticsforbuynow', 'sc_removelodash', 'sc_isrighttoleftinpage', 'sc_asyncpurchasefailurexboxcom', 'sc_apploadingts', 'sc_prominenteddchange', 'sc_buynowpmgrouping-minecraftnet', 'sc_disableshippingaddressinit', 'sc_preparecheckoutperf', 'sc_buynowuiprod', 'sc_contentratingts', 'sc_allowvenmoforbuynow-xboxcom', 'sc_rspv2', 'sc_buynowlistpichanges', 'sc_disableupiforbuynow-officedime', 'sc_allowpaysafeforus-storeapp', 'sc_expiredcardnextbutton', 'sc_uuid', 'sc_checkoutasyncpurchase', 'sc_readytopurchasefix', 'sc_enablelegalrequirements', 'sc_pidlignoreesckey', 'sc_expanded.purchasespinner', 'sc_trycheckoutnobackup', 'sc_disablevenmoforbuynow-officedime', 'sc_hideredeemclient-minecraftnet', 'sc_buynowpmgrouping-universalwebstore', 'sc_giftingtelemetryfix', 'sc_alwayscartmuid', 'sc_checkoutloadspinner', 'sc_reactredeem-storewindowsinapp', 'sc_perfloadeventfix', 'sc_usekoreanlegaltermstring', 'sc_purchaseredirectcontinuets', 'sc_fincastleui', 'sc_updateprofiletsenabled', 'sc_flexsubs', 'sc_notfoundts', 'sc_useonedscookiemanager', 'sc_scenariotelemetryrefactor', 'sc_promocodefocus', 'sc_onbodytsenabled', 'sc_pidlerrorhandler-storeapp', 'sc_bankchallengecheckout', 'sc_allowupiqrforbuynow', 'sc_fixforonlyasyncpiselect', 'sc_railv2', 'sc_checkoutglobalpiadd', 'sc_reactcheckout', 'sc_minmaxcheck', 'sc_helpv2', 'sc_xboxcomnosapi', 'sc_updateredemptionlink', 'sc_reactredeem-universalwebstore', 'sc_clientdebuginfo', 'sc_productlegaltermsv1ts', 'sc_pidlerrorhandler-xeweb', 'sc_reactredeem-storeapp', 'sc_hidedisabledpis', 'sc_paymentoptionnotfound', 'sc_removeresellerforstoreapp', 'sc_hideshippingfee', 'sc_enablekakaopay', 'sc_checkoutcontactpreference', 'sc_ordercheckoutfix', 'sc_disablecsvforadd-xboxcom', 'sc_calldccforasyncpi', 'sc_promostepstatus', 'sc_buynowglobalpiadd', 'sc_overlayfix', 'sc_buynowpmgrouping-skypecom', 'sc_buynowuipreload', 'sc_bnplmsgcart', 'sc_updatebillinginfo', 'sc_buynowpmgrouping-cascadewebstore', 'sc_allowpaysafeforus-xboxcom', 'sc_buynowpmgrouping-surfaceapp', 'sc_readymessagemark', 'sc_allowupiforbuynow', 'sc_redeemerroralert', 'sc_xboxcomasyncpurchase', 'sc_disablebuynowpmgrouping-storewindowsinapp', 'sc_askaparentroutetsenabled', 'sc_errorcartinfotelemetry', 'sc_skypenonactiveerror', 'sc_skippurchaseconfirm', 'sc_buynowfocustrapkeydown', 'sc_shareddowngrade', 'sc_addasyncpitelemetry', 'sc_eligibilityapi', 'sc_paymentchallengetsenabled', 'sc_allowvenmoforbuynow-minecraftnet', 'sc_removesetpaymentmethod', 'sc_ordereditforincompletedata', 'sc_disablecsvforadd-xenative', 'sc_bankchallenge', 'sc_billingaddressbuttontsenabled', 'sc_allowelo', 'sc_asyncpiurlupdate', 'sc_upistringchanges', 'sc_delayretry', 'sc_pidlerrorhandler-xboxcom', 'sc_allowupi', 'sc_hidesubscriptionprice', 'sc_perfredeemcomplete', 'sc_loadtestheadersenabled', 'sc_conversionblockederror', 'sc_cleanuppromocodes', 'sc_mcrenewaldatev2', 'sc_allowpaysafecard', 'sc_telemetryforbillingemail', 'sc_pidlloading', 'sc_addfocuslocktosubscriptionmodal', 'sc_purchasedblocked', 'sc_outofstock', 'sc_buynowpagexboxts', 'sc_allowcustompifiltering', 'sc_purchaseblockerrorhandling', 'sc_perfsummary', 'sc_buynowcontactpref', 'sc_errorpageviewfix', 'sc_newcheckoutselectorforxboxcom', 'sc_splipidltresourcehelper', 'sc_xboxredirection', 'sc_setbehaviordefaultvalue', 'sc_clienttelemetryforceenabled', 'sc_allowpaysafeforus-universalwebstore', 'sc_updateratingdescription', 'sc_paymentoptionlistts', 'sc_formatjsxts', 'sc_lowbardiscountmap', 'sc_moraystyle', 'sc_contactpreferenceupdate', 'sc_paymentsessiontsenabled', 'sc_hipercard', 'sc_uppercasepromocode', 'sc_resellerdetail', 'sc_askaparentinsufficientbalance', 'sc_fincastlecalculation', 'sc_moderngamertaggifting', 'sc_allowvenmoforcheckout', 'sc_xdlshipbuffer', 'sc_allowverve', 'sc_inlinetempfix', 'sc_purchaseredirectwaitts', 'sc_upgrademodaltrycheckout', 'sc_devicerepairpifilter', 'sc_statusts', 'sc_disablecsvforadd-xboxsocial', 'sc_greenshipping', 'sc_blocklegacyupgrade', 'sc_minecraftctasupdate', 'sc_disablecsvforadd']
 lock = Lock()
@@ -423,7 +437,9 @@ class Purchase:
         if not buyNow.status_code < 400:
             Logger.Sprint('ERROR','Failed To Start Minecraft Order!',Fore.LIGHTRED_EX)
             return "fail"
-
+        if not ',"soldToAddressId":"' in buyNow.text:
+            Logger.Sprint("ERROR","No Billing Address Found! Cry about it",Fore.LIGHTRED_EX)
+            return "fail"
         self.currencyCode = buyNow.text.split('"currencyCode":"')[1].split('"')[0]
         self.paymentInstrumentId = buyNow.text.split('{"paymentInstrumentId":"')[1].split('"')[0]
         self.cartId = buyNow.text.split('"cartId":"')[1].split('"')[0]
@@ -603,11 +619,10 @@ class Purchase:
         try:
             self.run()
         except:
-            # print_exc()
+            print_exc()
             pass
 
 if __name__=="__main__":
-    init()
     threads = int(Logger.Ask("THREADS",'Enter Thread Amount : ',Fore.LIGHTBLUE_EX))
     with ThreadPoolExecutor(max_workers=threads) as exc:
         for acc in open('accs.txt').read().splitlines():
