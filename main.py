@@ -603,7 +603,7 @@ class Purchase:
         try:
             self.run()
         except:
-            print_exc()
+            # print_exc()
             pass
 
 if __name__=="__main__":
