@@ -1,3 +1,9 @@
+# Requirements
+Brain Cells\
+Python 3\
+Ms Accs with Payment Method Linked\
+Residential Proxies ( Not compulsory )
+
 # How to use?
 
 Put accounts in accs.txt\
@@ -13,8 +19,14 @@ BS5KH5D3QQWV | 0X3J  400 Robux for Xbox\
 9ng07qjnk38j | 0010  AMONG US\
 9pcm4cmtppgc | 0010  LIES OF P\
 9nmpdq2nrx34 | 0010  STRAY\
-CFQ7TTC0KHS0 | 0008 || xbox gp 3 month $49.99\
+CFQ7TTC0KHS0 | 0008 || XBOX GP 3 Month
 
-# Support
+# I'm having issues with the purchaser. Where should I ask for help?
 
-No support cry about it
+https://www.google.com/
+
+# Contact
+
+Discord : _notlit12#0000 [ Do Not DM ME for Issues related to the tool]
+
+
