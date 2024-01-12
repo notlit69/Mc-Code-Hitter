@@ -8,7 +8,7 @@ Residential Proxies ( Not compulsory )
 
 Put accounts in accs.txt\
 Put proxies in proxies.txt\
-Run main.py\
+Run main.py
 
 # ProductIds and SkuIds
 C0F5HT9NV86P | 0X3J  V-BUCKS\
