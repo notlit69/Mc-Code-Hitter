@@ -3,7 +3,8 @@
 Put accounts in accs.txt\
 Put proxies in proxies.txt\
 Run main.py\
-ProductIds and SkuIds ->\ 
+
+# ProductIds and SkuIds
 C0F5HT9NV86P | 0X3J  V-BUCKS\
 9NQGKTXR9BZF | 0010  MINECRAFT DELUXE + JAVA + BEDROCK\
 9NXP44L49SHJ | 0010  MINECRAFT JAVA + BEDROCK\
