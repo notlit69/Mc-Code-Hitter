@@ -27,6 +27,6 @@ CFQ7TTC0KHS0 | 0008 || XBOX GP 3 Month
 [GPT](https://chat.openai.com/)
 # Contact
 
-Discord : _notlit12#0000 [ Do Not DM ME for Issues related to the tool]
+Discord : _notlit12#0000 [ Do Not DM ME for Help/Issues related to the tool]
 
 
