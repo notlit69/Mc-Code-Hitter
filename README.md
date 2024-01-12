@@ -23,8 +23,8 @@ CFQ7TTC0KHS0 | 0008 || XBOX GP 3 Month
 
 # I'm having issues with the purchaser. Where should I ask for help?
 
-https://www.google.com/
-
+[gogle](https://www.google.com/)\
+[gpt](https://chat.openai.com/)
 # Contact
 
 Discord : _notlit12#0000 [ Do Not DM ME for Issues related to the tool]
