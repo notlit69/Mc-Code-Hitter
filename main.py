@@ -1,21 +1,22 @@
 import os
+import random
+import string
+import re
+import json
+import urllib.parse
+import time
+
+from datetime import datetime
+from threading import Lock
+from concurrent.futures import ThreadPoolExecutor
+from traceback import print_exc
+
 try:
     import requests
-    import random
-    import urllib.parse
-    import string
-    import re
     import tls_client
-    import json
-    import time
     import yaml
-
-    from datetime import datetime
     from requests_toolbelt import MultipartEncoder
     from colorama import Fore, Style, init
-    from threading import Lock
-    from concurrent.futures import ThreadPoolExecutor
-    from traceback import print_exc
 except ModuleNotFoundError:
     os.system("pip install requests")
     os.system("pip install tls_client")
@@ -619,7 +620,7 @@ class Purchase:
         try:
             self.run()
         except:
-            print_exc()
+            # print_exc()
             pass
 
 if __name__=="__main__":
