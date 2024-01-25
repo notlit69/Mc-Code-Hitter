@@ -624,6 +624,7 @@ class Purchase:
             pass
 
 if __name__=="__main__":
+    init()
     threads = int(Logger.Ask("THREADS",'Enter Thread Amount : ',Fore.LIGHTBLUE_EX))
     with ThreadPoolExecutor(max_workers=threads) as exc:
         for acc in open('accs.txt').read().splitlines():
